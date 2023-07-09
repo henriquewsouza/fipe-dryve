@@ -33,8 +33,10 @@ public class VeiculoService {
     private MarcaRepository marcaRepository;
 
     @Autowired
-    public VeiculoService(FipeService fipeService) {
+    public VeiculoService(VeiculoRepository veiculoRepository, FipeService fipeService, MarcaRepository marcaRepository) {
+        this.veiculoRepository = veiculoRepository;
         this.fipeService = fipeService;
+        this.marcaRepository = marcaRepository;
     }
 
     public Veiculo saveVeiculo(Veiculo veiculo) {
