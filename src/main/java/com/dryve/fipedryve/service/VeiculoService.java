@@ -1,6 +1,9 @@
 package com.dryve.fipedryve.service;
 
+import com.dryve.fipedryve.repository.ModeloRepository;
 import com.dryve.fipedryve.repository.VeiculoRepository;
+import com.dryve.fipedryve.repository.MarcaRepository;
+import com.dryve.fipedryve.dto.MarcaDTO;
 import com.dryve.fipedryve.entity.FipeRequestBody;
 import com.dryve.fipedryve.entity.FipeResponse;
 import com.dryve.fipedryve.entity.Marca;
@@ -9,6 +12,8 @@ import com.dryve.fipedryve.entity.Veiculo;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +24,12 @@ public class VeiculoService {
 
     @Autowired
     private VeiculoRepository veiculoRepository;
+
+    @Autowired
     private FipeService fipeService;
+
+    @Autowired
+    private MarcaRepository marcaRepository;
 
     @Autowired
     public VeiculoService(FipeService fipeService) {
@@ -59,6 +69,23 @@ public class VeiculoService {
         return veiculoRepository.findByPlaca(placa)
                 .orElseThrow(() -> new IllegalArgumentException("Veículo não encontrado"));
     }
+
+    public List<MarcaDTO> getMarcasComTotalModelos() {
+    List<Marca> marcas = marcaRepository.findAll();
+    List<MarcaDTO> marcaDTOs = new ArrayList<>();
+
+    for (Marca marca : marcas) {
+        MarcaDTO marcaDTO = new MarcaDTO();
+        marcaDTO.setId(marca.getId().toString());
+        marcaDTO.setName(marca.getName());
+        marcaDTO.setTotal_modelos(marcas.size());
+        marcaDTOs.add(marcaDTO);
+    }
+    
+
+    return marcaDTOs;
+}
+
 
     // public List<Veiculo> getAllVeiculos() {
     //     return veiculoRepository.findAll();
