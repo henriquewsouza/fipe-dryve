@@ -38,15 +38,11 @@ public class VeiculoService {
     }
 
     public Veiculo saveVeiculo(Veiculo veiculo) {
-        System.out.println(veiculo.toString());
         if (veiculoRepository.existsByPlaca(veiculo.getPlaca())) {
             throw new IllegalArgumentException("Veículo já cadastrado com esta placa");
         }
         Modelo modelo = veiculo.getModelo();
-        System.out.println(modelo.toString());
-
         Marca marca = modelo.getMarca();
-        System.out.println(marca.toString());
         FipeRequestBody fipeRequestBody = new FipeRequestBody();
         fipeRequestBody.setCodigoTabelaReferencia(fipeService.getTabelaReferencia());
         fipeRequestBody.setCodigoMarca(marca.getFipeId());
@@ -57,7 +53,6 @@ public class VeiculoService {
         fipeRequestBody.setTipoConsulta("tradicional");
 
         FipeResponse fipeResponse = fipeService.consultaFipe(fipeRequestBody);
-        System.out.println(fipeResponse.getValor());
 
 
         veiculo.setPrecoFipe(fipeResponse.getValorAsBigDecimal());

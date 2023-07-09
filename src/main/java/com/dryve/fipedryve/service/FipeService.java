@@ -29,7 +29,6 @@ public class FipeService {
         headers.set("Referer", "http://veiculos.fipe.org.br");
         headers.set("Host", "veiculos.fipe.org.br");
         HttpEntity<FipeRequestBody> requestEntity = new HttpEntity<>(requestBody, headers);
-        System.out.println(requestEntity);
 
         FipeResponse response = restTemplate.exchange(
             "http://veiculos.fipe.org.br/api/veiculos/ConsultarValorComTodosParametros",
