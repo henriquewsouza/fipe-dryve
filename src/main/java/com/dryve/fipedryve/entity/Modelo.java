@@ -35,5 +35,7 @@ public class Modelo {
     @JoinColumn(name = "id_marca")
     private Marca marca;
 
+
+
     
 }

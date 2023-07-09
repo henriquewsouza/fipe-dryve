@@ -15,6 +15,7 @@ import lombok.Setter;
 public class Veiculo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     
@@ -36,4 +37,9 @@ public class Veiculo {
     @ManyToOne
     @JoinColumn(name = "modelo_id")
     private Modelo modelo;
+
+    @Override
+    public String toString() {
+        return String.format("Veiculo [placa=%s, ano=%d, modelo=%s, precoFipe=%.2f]", placa, ano, modelo, precoFipe);
+    }
 }
