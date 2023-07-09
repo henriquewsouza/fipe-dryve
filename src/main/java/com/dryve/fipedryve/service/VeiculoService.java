@@ -7,6 +7,7 @@ import com.dryve.fipedryve.entity.Marca;
 import com.dryve.fipedryve.entity.Modelo;
 import com.dryve.fipedryve.entity.Veiculo;
 
+
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,10 @@ public class VeiculoService {
         return veiculoRepository.save(veiculo);
     }
 
-    
+    public Veiculo getVeiculoByPlaca(String placa) {
+        return veiculoRepository.findByPlaca(placa)
+                .orElseThrow(() -> new IllegalArgumentException("Veículo não encontrado"));
+    }
 
     // public List<Veiculo> getAllVeiculos() {
     //     return veiculoRepository.findAll();

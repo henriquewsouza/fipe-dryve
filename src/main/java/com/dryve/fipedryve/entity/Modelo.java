@@ -4,6 +4,8 @@ package com.dryve.fipedryve.entity;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +31,7 @@ public class Modelo {
     private int fipeId;
 
     @OneToMany(mappedBy = "modelo")
+    @JsonIgnore
     private List<Veiculo> veiculos;
 
     @ManyToOne
