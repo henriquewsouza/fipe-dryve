@@ -14,6 +14,7 @@ import com.dryve.fipedryve.entity.Veiculo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -84,12 +85,28 @@ public class VeiculoService {
     
 
     return marcaDTOs;
-}
+    }
 
+    public MarcaDTO getMarcaById(String id) {
+    UUID marcaId;
+    List<Marca> marcas = marcaRepository.findAll();
+    try {
+        marcaId = UUID.fromString(id);
+    } catch (IllegalArgumentException e) {
+        throw new IllegalArgumentException("ID da marca inválido");
+    }
 
-    // public List<Veiculo> getAllVeiculos() {
-    //     return veiculoRepository.findAll();
-    // }
+    Marca marca = marcaRepository.findById(marcaId)
+            .orElseThrow(() -> new IllegalArgumentException("Marca não encontrada"));
+
+    MarcaDTO marcaDTO = new MarcaDTO();
+    marcaDTO.setId(marca.getId().toString());
+    marcaDTO.setName(marca.getName());
+    marcaDTO.setTotal_modelos(marcas.size());
+
+    return marcaDTO;
+    }
+
 
 }
 

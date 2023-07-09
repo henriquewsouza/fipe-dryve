@@ -26,4 +26,10 @@ public class MarcaController {
         return ResponseEntity.ok(marcas);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<MarcaDTO> getMarcaById(@PathVariable("id") String id) {
+        MarcaDTO marca = veiculoService.getMarcaById(id);
+        return ResponseEntity.ok(marca);
+    }
+
 }
