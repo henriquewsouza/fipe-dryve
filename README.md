@@ -38,7 +38,7 @@ Certifique-se de fornecer o caminho correto para o diretório do banco de dados 
 
 Você pode acessar o console do H2 através do http://localhost:8080/h2-ui
 
-IMPORTANTE: Popule o DB com os INSERTS encontrados no final do READ.ME
+### IMPORTANTE: Popule o DB com os INSERTS encontrados no final do READ.ME
 
 ### Execução do Projeto
 Siga as etapas abaixo para executar o projeto:
